@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace 必须写 Mapper 接口的全限定名，MyBatis 靠它把 XML 和接口绑在一起 -->
+<mapper namespace="com.wl.leetcodereviewapi.mapper.ProblemMapper">
+
+    <!-- id 必须和方法名一致；resultType="Problem" 是因为 application.properties 里配了 type-aliases-package -->
+    <select id="selectAll" resultType="Problem">
+        SELECT id,
+               user_id,
+               leetcode_no,
+               title,
+               difficulty,
+               tags,
+               url,
+               created_at,
+               updated_at
+        FROM problem
+        ORDER BY id DESC
+    </select>
+
+</mapper>
