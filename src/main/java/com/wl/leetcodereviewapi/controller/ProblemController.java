@@ -1,7 +1,7 @@
 package com.wl.leetcodereviewapi.controller;
 
 import com.wl.leetcodereviewapi.entity.Problem;
-import com.wl.leetcodereviewapi.mapper.ProblemMapper;
+import com.wl.leetcodereviewapi.mapper.ProblemRecordMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +18,6 @@ import java.util.List;
 public class ProblemController {
 
     // 构造器注入（@RequiredArgsConstructor 自动生成带这个字段的构造方法）
-    private final ProblemMapper problemMapper;
+    private final ProblemRecordMapper problemRecordMapper;
 
-    /** 查询全部题目 */
-    @GetMapping
-    public List<Problem> list() {
-        return problemMapper.selectAll();
-    }
 }

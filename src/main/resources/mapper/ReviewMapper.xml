@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wl.leetcodereviewapi.mapper.ReviewMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO review (record_id, round, review_date, is_done)
+        VALUES (#{recordId}, #{round}, #{reviewDate}, #{isDone})
+    </insert>
+
+    <select id="findDue" resultType="com.wl.leetcodereviewapi.dto.TodayReviewVO">
+        SELECT
+            r.id          AS reviewId,
+            r.round       AS round,
+            r.review_date AS reviewDate,
+            p.id          AS problemId,
+            p.leetcode_no AS leetcodeNo,
+            p.title       AS title,
+            p.difficulty  AS difficulty
+        FROM review r
+                 JOIN record rec ON r.record_id = rec.id
+                 JOIN problem p   ON rec.problem_id = p.id
+        WHERE r.review_date &lt;= #{today}
+          AND r.is_done = 0
+          AND p.user_id = #{userId}
+        ORDER BY r.review_date ASC
+    </select>
+
+    <update id="markDone">
+        UPDATE review SET is_done = 1, done_at = NOW()
+        WHERE id = #{reviewId}
+    </update>
+
+</mapper>

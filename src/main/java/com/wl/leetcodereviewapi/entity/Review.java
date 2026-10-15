@@ -10,25 +10,12 @@ import java.time.LocalDateTime;
  */
 @Data
 public class Review {
+    Long id;
+    Long recordId;
+    Integer round;  //1/2/3=第3/7/14天
+    LocalDate reviewDate;
+    Boolean isDone;
+    LocalDateTime doneAt;
+    LocalDateTime creatAt;
 
-    /** 主键 */
-    private Long id;
-
-    /** 刷题记录 id */
-    private Long recordId;
-
-    /** 复习轮次：1/2/3 对应第 3/7/14 天 */
-    private Integer round;
-
-    /** 应复习日期 */
-    private LocalDate reviewDate;
-
-    /** 是否已完成：1 是，0 否 */
-    private Boolean isDone;
-
-    /** 完成时间 */
-    private LocalDateTime doneAt;
-
-    /** 创建时间 */
-    private LocalDateTime createdAt;
 }

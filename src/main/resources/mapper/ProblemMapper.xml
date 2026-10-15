@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- namespace 必须写 Mapper 接口的全限定名，MyBatis 靠它把 XML 和接口绑在一起 -->
-<mapper namespace="com.wl.leetcodereviewapi.mapper.ProblemMapper">
+<mapper namespace="com.wl.leetcodereviewapi.mapper.ProblemRecordMapper">
 
     <!-- id 必须和方法名一致；resultType="Problem" 是因为 application.properties 里配了 type-aliases-package -->
     <select id="selectAll" resultType="Problem">
