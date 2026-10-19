@@ -10,18 +10,25 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-@Service
-@RequiredArgsConstructor
+//1-12导入包
+@Service                               //登记进Spring容器
+@RequiredArgsConstructor          //生成构造器，给final字段赋值
 public class ProblemRecordService {
-
+    //两个工具类，但是没有new他们
+    // 是Spring启动时从容器中找到这两个Mapper，通过构造器塞进来
+    //final一旦注入就不能修改（安全）
     private final ProblemRecordMapper recordMapper;
     private final ReviewMapper reviewMapper;
-
+//为什么推荐构造器注入，而不是字段上的@Autowired
+//1final不可变  2对象创建时就注入了，不会出现半成品对象  3单元测试可以直接new
     private static final int[] REVIEW_INTERVALS={3,7,14};
-
-    @Transactional
+//为什么用数组加循环
+//如果需要修改，只用改这一行
+// static=属于类，不属于某个对象（所有实例共用这一份）   final不能修改值
+    @Transactional   //保证原子性，
     public Long recordProblem(Long problemId,boolean isAc,String reason,String thinking,Integer costMinutes){
+//为什么用Integer包装类不用int
+//Integer允许null，int默认是0（耗时0分钟和没填写的区别），凡是可选参数，都用包装类
         ProblemRecord record =new ProblemRecord();
         record.setProblemId(problemId);
         record.setIsAc(isAc);
@@ -29,14 +36,20 @@ public class ProblemRecordService {
         record.setThinking(thinking);
         record.setCostMinutes(costMinutes);
         record.setSubmittedAt(LocalDateTime.now());
-        recordMapper.insert(record);
-
+        //当前服务器时间  LocalDateTime.now()
+        recordMapper.insert(record);  //存进数据库
+//recordMapper只是个接口，写了insert方法，但是并没有实现
+//实现是由MyBatis生成的————读取了ProblemRecordMapper.xml里的<insert>
+//MyBatis通过@Mapper注解+XML，用动态代理在运行时生成实现类，注册进Spring
         LocalDate today=LocalDate.now();
+        //生成三条复习任务
         for(int i=0;i<REVIEW_INTERVALS.length;i++){
             Review review=new Review();
+
             review.setRecordId(record.getId());
-            review.setRound(i+1);
-            review.setReviewDate(today.plusDays(REVIEW_INTERVALS[i]));
+            
+            review.setRound(i+1);//三轮循环1/2/3
+            review.setReviewDate(today.plusDays(REVIEW_INTERVALS[i]));//对应日期
             review.setIsDone(false);
             reviewMapper.insert(review);
         }

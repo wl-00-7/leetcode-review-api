@@ -9,6 +9,11 @@
         VALUES (#{recordId}, #{round}, #{reviewDate}, #{isDone})
     </insert>
 
+    <select id="findById" resultType="com.wl.leetcodereviewapi.entity.Review">
+            SELECT id,record_id,round,review_date,is_done,done_at
+            FROM review WHERE id=#{reviewId}
+    </select>
+
     <select id="findDue" resultType="com.wl.leetcodereviewapi.dto.TodayReviewVO">
         SELECT
             r.id          AS reviewId,
@@ -32,4 +37,10 @@
         WHERE id = #{reviewId}
     </update>
 
+    <update id="resetRemainingRounds">
+            UPDATE review
+            SET review_date=#{newDate}
+            WHERE record_id=#{recordId}
+            AND is_done=0
+    </update>
 </mapper>

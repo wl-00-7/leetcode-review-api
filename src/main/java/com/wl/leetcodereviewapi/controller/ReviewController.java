@@ -27,7 +27,8 @@ public class ReviewController {
     }
 
     @PostMapping("/{id}/done")
-    public void done(@PathVariable Long id){
-        reviewService.completeReview(id);
+    public void done(@PathVariable Long id,@RequestParam boolean passed)
+    {
+        reviewService.completeReview(id,passed);
     }
 }
