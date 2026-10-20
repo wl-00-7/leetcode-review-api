@@ -1,6 +1,8 @@
 ### 记录做一题（做题 + 自动派生 3/7/14 复习任务）
 //POST http://localhost:8080/reviews/records?problemId=1&isAc=true
 
-POST http://localhost:8080/reviews/1/done
+//POST http://localhost:8080/reviews/1/done
 
 //POST http://localhost:8080/reviews/records?problemId=1&isAc=true
+
+GET http://localhost:8080/problems

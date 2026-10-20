@@ -26,6 +26,7 @@ public class ProblemRecordService {
 //为什么用数组加循环
 //如果需要修改，只用改这一行
 // static=属于类，不属于某个对象（所有实例共用这一份）  // final不能修改值
+
     @Transactional   //保证原子性，
     public Long recordProblem(Long problemId,boolean isAc,String reason,String thinking,Integer costMinutes){
 //为什么用Integer包装类不用int

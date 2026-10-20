@@ -1,7 +1,9 @@
 package com.wl.leetcodereviewapi.service;
 
 import com.wl.leetcodereviewapi.dto.TodayReviewVO;
+
 import com.wl.leetcodereviewapi.entity.Review;
+import com.wl.leetcodereviewapi.mapper.ProblemMapper;
 import com.wl.leetcodereviewapi.mapper.ReviewMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,9 +16,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReviewService {
     private final ReviewMapper reviewMapper;
+
     public List<TodayReviewVO> getTodayReviews(Long userId){
         return reviewMapper.findDue(userId, LocalDate.now());
     }
+
     @Transactional  //下面的方法有两个往数据库的写操作，此注解保证了两个写操作一起成功，否则回退
     public void completeReview(Long reviewId,boolean passed){
         Review review=reviewMapper.findById(reviewId);
