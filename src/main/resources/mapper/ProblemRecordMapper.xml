@@ -5,8 +5,11 @@
 <mapper namespace="com.wl.leetcodereviewapi.mapper.ProblemRecordMapper">
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        <!-- useGeneratedKeys=true：insert 之后把数据库刚生成的主键值回填到 record.id -->
         INSERT INTO record (problem_id, is_ac, reason, thinking, cost_minutes, submitted_at)
         VALUES (#{problemId}, #{isAc}, #{reason}, #{thinking}, #{costMinutes}, #{submittedAt})
+        <!-- #{xxx} 不是 SQL 代码，会被编译成 ? 占位符（PreparedStatement），把用户输入当参数，可防 SQL 注入 -->
+        <!-- ${xxx} 是字符串直接拼接进 SQL（危险，注入漏洞），非必要不用 -->
     </insert>
 
 </mapper>

@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class LeetcodeReviewApiApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(LeetcodeReviewApiApplication.class, args);
     }
 

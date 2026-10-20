@@ -11,7 +11,9 @@ import java.util.List;
 public interface ReviewMapper {
     void insert(Review review);
     List<TodayReviewVO> findDue(@Param("userId") long userId, @Param("today") LocalDate today);
+
     void markDone(@Param("reviewId") Long reviewId);
     Review findById(@Param("reviewId") Long reviewId);
+
     void resetRemainingRounds(@Param("recordId") Long recordId,@Param("newDate") LocalDate newDate);
 }
