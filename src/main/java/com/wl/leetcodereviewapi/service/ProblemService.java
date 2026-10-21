@@ -14,4 +14,11 @@ public class ProblemService {
     public List<Problem> listAll(){
         return problemMapper.selectAll();
     }
+    public Long create(Problem problem){
+        if(problem.getDifficulty()==null){
+            problem.setDifficulty("MEDIUM");
+        }
+        problemMapper.insert(problem);
+        return problem.getId();
+    }
 }

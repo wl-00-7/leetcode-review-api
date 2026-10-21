@@ -20,4 +20,9 @@
         ORDER BY id DESC
     </select>
 
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO problem (user_id, leetcode_no, title, difficulty, tags, url)
+        VALUES (#{userId}, #{leetcodeNo}, #{title}, #{difficulty}, #{tags}, #{url})
+    </insert>
+
 </mapper>

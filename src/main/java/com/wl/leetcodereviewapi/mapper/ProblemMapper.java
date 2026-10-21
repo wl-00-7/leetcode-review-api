@@ -13,4 +13,5 @@ import java.util.List;
 public interface ProblemMapper {
     /** 查询全部题目，按 id 倒序 */
     List<Problem> selectAll();
+    void insert(Problem problem);
 }

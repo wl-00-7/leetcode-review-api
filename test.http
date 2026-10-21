@@ -3,6 +3,21 @@
 
 //POST http://localhost:8080/reviews/1/done
 
-//POST http://localhost:8080/reviews/records?problemId=1&isAc=true
-
 GET http://localhost:8080/problems
+
+//GET http://localhost:8080/reviews/today?userId=1
+
+//POST http://localhost:8080/reviews/4/done?passed=true
+
+### 新增题目
+POST http://localhost:8080/problems
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "leetcodeNo": 1,
+  "title": "两数之和",
+  "difficulty": "EASY",
+  "tags": "哈希",
+  "url": "https://leetcode.cn/problems/two-sum/"
+}

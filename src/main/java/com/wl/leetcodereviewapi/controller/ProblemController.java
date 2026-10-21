@@ -3,9 +3,7 @@ package com.wl.leetcodereviewapi.controller;
 import com.wl.leetcodereviewapi.entity.Problem;
 import com.wl.leetcodereviewapi.service.ProblemService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,6 +22,11 @@ public class ProblemController {
     @GetMapping
     public List<Problem> listAll() {
         return problemService.listAll();
+    }
+
+    @PostMapping
+    public Long create(@RequestBody Problem problem){
+        return problemService.create(problem);
     }
 
 }
