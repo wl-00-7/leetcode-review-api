@@ -25,4 +25,14 @@
         VALUES (#{userId}, #{leetcodeNo}, #{title}, #{difficulty}, #{tags}, #{url})
     </insert>
 
+    <update id="update">
+        UPDATE problem
+        SET leetcode_no = #{leetcodeNo},
+            title       = #{title},
+            difficulty  = #{difficulty},
+            tags        = #{tags},
+            url         = #{url}
+        WHERE id = #{id}
+    </update>
+
 </mapper>

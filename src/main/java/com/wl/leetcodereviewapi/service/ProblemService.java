@@ -21,4 +21,16 @@ public class ProblemService {
         problemMapper.insert(problem);
         return problem.getId();
     }
+    public void update(Long id,Problem problem){
+        problem.setId(id);
+        if(problem.getDifficulty()==null){
+            problem.setDifficulty("MEDIUM");
+        }
+        int rows=problemMapper.update(problem);
+        if(rows==0){
+            throw new IllegalArgumentException("题目不存在:"+id);
+
+        }
+
+    }
 }
