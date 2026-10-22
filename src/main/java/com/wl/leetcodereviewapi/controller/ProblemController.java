@@ -33,4 +33,8 @@ public class ProblemController {
     public void update(@PathVariable Long id,@RequestBody Problem problem){
         problemService.update(id,problem);
     }
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id){
+        problemService.delete(id);
+    }
 }

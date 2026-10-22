@@ -35,4 +35,9 @@
         WHERE id = #{id}
     </update>
 
+    <delete id="delete">
+        DELETE FROM problem WHERE id = #{id}
+    </delete>
+
+
 </mapper>

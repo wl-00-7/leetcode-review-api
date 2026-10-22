@@ -31,6 +31,11 @@ public class ProblemService {
             throw new IllegalArgumentException("题目不存在:"+id);
 
         }
-
+    }
+    public void delete(Long id){
+        int rows=problemMapper.delete(id);
+        if(rows==0){
+            throw new IllegalArgumentException("题目不存在"+id);
+        }
     }
 }

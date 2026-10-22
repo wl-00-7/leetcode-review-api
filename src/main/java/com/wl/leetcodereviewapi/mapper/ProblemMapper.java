@@ -2,6 +2,7 @@ package com.wl.leetcodereviewapi.mapper;
 
 import com.wl.leetcodereviewapi.entity.Problem;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -15,4 +16,5 @@ public interface ProblemMapper {
     List<Problem> selectAll();
     void insert(Problem problem);
     int update(Problem problem);
+    int delete(@Param("id")Long id);
 }
