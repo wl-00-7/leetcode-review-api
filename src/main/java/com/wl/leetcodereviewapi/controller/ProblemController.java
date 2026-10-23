@@ -1,5 +1,6 @@
 package com.wl.leetcodereviewapi.controller;
 
+import com.wl.leetcodereviewapi.common.Result;
 import com.wl.leetcodereviewapi.entity.Problem;
 import com.wl.leetcodereviewapi.service.ProblemService;
 import lombok.RequiredArgsConstructor;
@@ -20,21 +21,24 @@ public class ProblemController {
 
     /** 查询全部题目，按 id 倒序 */
     @GetMapping
-    public List<Problem> listAll() {
-        return problemService.listAll();
+    public Result<List<Problem>> listAll() {
+        return Result.ok(problemService.listAll());
     }
 
     @PostMapping
-    public Long create(@RequestBody Problem problem){
-        return problemService.create(problem);
+    public Result<Long> create(@RequestBody Problem problem){
+        return Result.ok(problemService.create(problem));
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable Long id,@RequestBody Problem problem){
+    public Result<Void> update(@PathVariable Long id,@RequestBody Problem problem){
         problemService.update(id,problem);
+        return Result.ok(null);
     }
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
+    public Result<Void> delete(@PathVariable Long id){
         problemService.delete(id);
+        return Result.ok(null);
     }
+
 }
