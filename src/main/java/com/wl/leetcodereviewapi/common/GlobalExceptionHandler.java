@@ -1,6 +1,8 @@
 package com.wl.leetcodereviewapi.common;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 //@ControllerAdvice+@ResponseBody
@@ -17,5 +19,20 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Result<Void>> handleUnknown(Exception e){
         return ResponseEntity.status(500).body(Result.fail(500,"服务器内部错误"));
+    }
+
+    //校验失败时抛出的异常类型 MethodArgumentNotValidException  方法参数校验未通过
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Result<Void>> handleValid(MethodArgumentNotValidException e){
+        String message="参数校验失败";  //兜底文案，如果得不到具体信息
+        //e.getBindingResult()装着所有字段的错误（可能一次有多个字段错误）
+        //getFieldError()取第一个字段错误
+
+        //getDefaultMessage()  取你在注解里写的`message = "题目标题不能为空"`
+        FieldError fe = e.getBindingResult().getFieldError();
+        if (fe != null) {
+            message = fe.getDefaultMessage();
+        }
+        return ResponseEntity.status(400).body(Result.fail(400,message));
     }
 }

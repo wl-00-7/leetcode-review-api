@@ -1,6 +1,7 @@
 package com.wl.leetcodereviewapi.controller;
 
 
+import com.wl.leetcodereviewapi.common.Result;
 import com.wl.leetcodereviewapi.service.ProblemRecordService;
 import com.wl.leetcodereviewapi.service.ReviewService;
 import com.wl.leetcodereviewapi.dto.TodayReviewVO;
@@ -25,24 +26,28 @@ public class ReviewController {
     //controller不自己干活，持有service，把活转出去
     private final ProblemRecordService recordService;
     private final ReviewService reviewService;
+
 //方法级映射 只接受POST请求  完整路径是/reviews/records
     @PostMapping("/records")
-    public Long record(@RequestParam Long problemId,@RequestParam boolean isAc){
+    public Result<Long> record(@RequestParam Long problemId, @RequestParam boolean isAc){
     //@RequestParam从URL的key=value里面取参数
-        return recordService.recordProblem(problemId,isAc,null,null,null);
+        return Result.ok(recordService.recordProblem(problemId,isAc,null,null,null));
     }
+
 //只接受GET    GET /reviews/today?userId=1
     @GetMapping("/today")
-    public List<TodayReviewVO> today(@RequestParam Long userId){
-        return reviewService.getTodayReviews(userId);
+    public Result<List<TodayReviewVO>> today(@RequestParam Long userId){
+        return Result.ok(reviewService.getTodayReviews(userId));
     }
 //dto类
+
     //{id}占位符
     @PostMapping("/{id}/done")
-    public void done(@PathVariable Long id,@RequestParam boolean passed)
+    public Result<Void> done(@PathVariable Long id,@RequestParam boolean passed)
     {
    //@PathVariable是从路径段里取值  POST/reviews/4/done中的4
     //@RequestParam boolean passed从？passed=false取值  URL问好后面/表单
         reviewService.completeReview(id,passed);
+        return Result.ok(null);
     }
 }

@@ -3,6 +3,7 @@ package com.wl.leetcodereviewapi.controller;
 import com.wl.leetcodereviewapi.common.Result;
 import com.wl.leetcodereviewapi.entity.Problem;
 import com.wl.leetcodereviewapi.service.ProblemService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,14 +25,14 @@ public class ProblemController {
     public Result<List<Problem>> listAll() {
         return Result.ok(problemService.listAll());
     }
-
+//@Valid需要紧贴着要校验得到那个参数前面
     @PostMapping
-    public Result<Long> create(@RequestBody Problem problem){
+    public Result<Long> create(@Valid @RequestBody Problem problem){
         return Result.ok(problemService.create(problem));
     }
 
     @PutMapping("/{id}")
-    public Result<Void> update(@PathVariable Long id,@RequestBody Problem problem){
+    public Result<Void> update(@PathVariable Long id,@Valid @RequestBody Problem problem){
         problemService.update(id,problem);
         return Result.ok(null);
     }
