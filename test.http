@@ -1,2 +1,5 @@
 
-POST http://localhost:8080/reviews/2/done?passed=true
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{ "username": "wl", "password": "123456" }

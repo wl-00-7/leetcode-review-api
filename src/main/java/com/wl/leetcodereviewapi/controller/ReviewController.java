@@ -36,7 +36,7 @@ public class ReviewController {
 
 //只接受GET    GET /reviews/today?userId=1
     @GetMapping("/today")
-    public Result<List<TodayReviewVO>> today(@RequestParam Long userId){
+    public Result<List<TodayReviewVO>> today(@RequestAttribute("userId") Long userId){
         return Result.ok(reviewService.getTodayReviews(userId));
     }
 //dto类
